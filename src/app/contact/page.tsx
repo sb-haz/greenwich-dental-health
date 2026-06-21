@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { PageHero } from "@/components/PageHero";
 import { SpeakToUsBanner } from "@/components/SpeakToUsBanner";
-import { site } from "@/lib/content";
+import { pageHeroImages, site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -15,9 +15,11 @@ export default function ContactPage() {
       <PageHero
         title="Contact Us"
         subtitle="We would love to hear from you. Book online, call us, or send an enquiry below."
+        image={pageHeroImages.contact.src}
+        imageAlt={pageHeroImages.contact.alt}
       />
 
-      <section className="px-5 py-16 lg:px-8 lg:py-24">
+      <section className="page-section page-section--loose">
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
           <div>
             <h2 className="heading-sm text-foreground">Get in touch</h2>

@@ -1,6 +1,9 @@
 export const site = {
   name: "Greenwich Dental Health",
   logo: "/logo.png",
+  /** Intrinsic logo dimensions — keep in sync with public/logo.png to avoid stretch */
+  logoWidth: 1024,
+  logoHeight: 342,
   tagline: "Your Private Dentist in Greenwich, London",
   phone: "020 8016 4121",
   phoneHref: "tel:+442080164121",
@@ -16,6 +19,26 @@ export const site = {
     { day: "Saturday", time: "By appointment" },
     { day: "Sunday", time: "Closed" },
   ],
+} as const;
+
+/** Self-hosted stock photos (placeholders until client supplies photography) */
+const stock = {
+  awardPractice: "/images/award-practice.jpg",
+  awardDigital: "/images/award-digital.jpg",
+  patientSmile: "/images/patient-smile.jpg",
+  patientFemale: "/images/patient-female.jpg",
+  clinic: "/images/clinic.jpg",
+  portraitWoman: "/images/portrait-woman.jpg",
+  implants: "/images/implants.jpg",
+  team: "/images/team.jpg",
+  cosmetic: "/images/cosmetic.jpg",
+  implantClinic: "/images/implant-clinic.jpg",
+  teamMale: "/images/team-male.jpg",
+  reviewFemale: "/images/review-female.jpg",
+  reviewMale: "/images/review-male.jpg",
+  reviewMale2: "/images/review-male-2.jpg",
+  teamFemale: "/images/team-female.jpg",
+  teamMale2: "/images/team-male-2.jpg",
 } as const;
 
 export const navLinks = [
@@ -44,7 +67,7 @@ export const awards = [
     title: "Practice of the Year",
     organisation: "UK Private Dentistry Awards",
     result: "Winner",
-    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=260&fit=crop&q=80",
+    image: stock.awardPractice,
     featured: true,
   },
   {
@@ -52,7 +75,7 @@ export const awards = [
     title: "Best Digital Dental Practice",
     organisation: "UK Private Dentistry Awards",
     result: "Highly Commended",
-    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=260&fit=crop&q=80",
+    image: stock.awardDigital,
     featured: true,
   },
   {
@@ -60,7 +83,7 @@ export const awards = [
     title: "Invisalign Elite Provider",
     organisation: "Invisalign®",
     result: "Certified Provider",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=260&fit=crop&q=80",
+    image: stock.patientSmile,
     featured: true,
   },
 ] as const;
@@ -71,78 +94,169 @@ export const contactBanner = {
   address: site.address,
 } as const;
 
+export const treatmentsCta = {
+  eyebrow: "Not sure what you need?",
+  title: "Book a consultation first",
+  lead: "We'll examine, explain the options and give you a written estimate — no obligation to go ahead.",
+} as const;
+
+export const nervousPatientsContent = {
+  intro: {
+    eyebrow: "Nervous or anxious?",
+    title: "We understand — and we're here to help",
+    lead: "Dental anxiety is common. Many of our patients had avoided the dentist for years before finding us. We take things at your pace, explain every step clearly, and never rush you.",
+  },
+  sedationTitle: "Options to help you feel relaxed",
+  sedationLead:
+    "Sedation is not always needed — but when it is, we offer safe, clinician-led options tailored to your age and treatment.",
+  sedationOptions: [
+    {
+      title: "IV sedation",
+      subtitle: "Adults",
+      description:
+        "A deeper level of relaxation for longer or more complex appointments. You remain conscious but deeply calm, with monitoring throughout.",
+    },
+    {
+      title: "Inhalation sedation",
+      subtitle: "Children aged 5–14",
+      description:
+        "Also known as laughing gas — a gentle, well-established option that helps children feel at ease during treatment.",
+    },
+    {
+      title: "Gentle care without sedation",
+      subtitle: "Every visit",
+      description:
+        "Clear explanations, breaks when you need them, and a calm environment. Many nervous patients build confidence over time without sedation.",
+    },
+  ],
+  stepsTitle: "How we look after you",
+  steps: [
+    {
+      title: "Listen first",
+      text: "Tell us what makes you anxious — past experiences, sounds, needles, or not knowing what to expect. We adapt to you.",
+    },
+    {
+      title: "Explain everything",
+      text: "Before any treatment, we walk you through the plan in plain language. You can ask questions at any point.",
+    },
+    {
+      title: "Go at your pace",
+      text: "Short appointments, hand signals if you need a pause, and no pressure to proceed until you're ready.",
+    },
+    {
+      title: "Build confidence",
+      text: "Many patients who once dreaded the dentist now attend regularly — we're proud of that journey.",
+    },
+  ],
+  quote: {
+    text: "I am always pretty nervous about visiting the dentist — I haven't found one I have particularly liked until now. These guys are phenomenal! They put you at ease, explain everything and answer any questions.",
+    author: "Sarah T.",
+    detail: "Nervous patient, Greenwich",
+    image: stock.patientSmile,
+  },
+  ctaTitle: "Take the first step — no pressure",
+  ctaLead:
+    "Book a consultation to talk through your concerns in a calm, unhurried appointment. We'll agree a plan together before any treatment.",
+} as const;
+
+export const emergencyContent = {
+  callEyebrow: "Urgent dental care",
+  callTitle: "Call us now — we'll prioritise emergencies",
+  callLead: "If you are in pain, have broken a tooth, or suffered dental trauma, phone the practice straight away. We aim to see emergency patients as soon as we can.",
+  situationsTitle: "Common dental emergencies we treat",
+  situations: [
+    "Severe toothache or swelling",
+    "Broken, chipped, or knocked-out teeth",
+    "Lost fillings or crowns",
+    "Dental trauma after an accident",
+    "Bleeding that will not stop after first aid",
+    "Pain or infection after recent treatment",
+  ],
+  feeTitle: "Emergency appointment fees",
+  feeStandard: "£120",
+  feeStandardDetail: "Assessment including a small x-ray if required",
+  feeExisting: "£85",
+  feeExistingDetail: "For regular existing patients who have attended check-ups with us",
+  urgentWarningTitle: "When to call 999 or go to A&E",
+  urgentWarning:
+    "If you have severe swelling affecting your breathing or swallowing, heavy uncontrolled bleeding, or suspect a serious jaw injury, call 999 or attend your nearest A&E department immediately — do not wait for a dental appointment.",
+  visitTitle: "What happens when you arrive",
+  visitSteps: [
+    {
+      title: "Quick assessment",
+      text: "We focus on relieving pain and understanding the problem — including x-rays if needed.",
+    },
+    {
+      title: "Clear options",
+      text: "We'll explain what can be done today and any follow-up treatment, with fees confirmed before you agree.",
+    },
+    {
+      title: "Same-day care when possible",
+      text: "Many emergencies can be stabilised or completed in one visit — including composite repairs.",
+    },
+  ],
+  quote: {
+    text: "Fantastic dental practice! I was able to get a same day emergency appointment after smashing my front teeth and Dr Goyal did an amazing job with my composite fillings.",
+    author: "Rebecca Corry",
+    detail: "Emergency patient",
+    image: stock.patientFemale,
+  },
+  ctaTitle: "In pain right now?",
+  ctaLead: "Call the practice first so we can advise you and arrange the soonest appointment.",
+} as const;
+
 export const images = {
-  hero: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&fit=crop&q=80",
-  clinic: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&fit=crop&q=80",
-  smile: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1200&fit=crop&q=80",
-  whitening: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=1200&fit=crop&q=80",
-  implants: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1200&fit=crop&q=80",
-  team: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&fit=crop&q=80",
-  cosmetic: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200&fit=crop&q=80",
-  implantClinic: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1200&fit=crop&q=80",
-  testimonial: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&fit=crop&q=80",
-  invisalign: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1200&fit=crop&q=80",
+  hero: stock.clinic,
+  clinic: stock.clinic,
+  smile: stock.patientSmile,
+  whitening: stock.portraitWoman,
+  implants: stock.implants,
+  team: stock.team,
+  cosmetic: stock.cosmetic,
+  implantClinic: stock.implantClinic,
+  testimonial: stock.portraitWoman,
+  invisalign: stock.patientSmile,
 } as const;
 
 export const homeHero = {
   headline: "Award-winning private dental clinic",
-  subtitle: "Modern private dentistry with transparent fees and a team who take time to listen.",
-  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1200&fit=crop&crop=faces&q=80",
+  subtitle:
+    "Private dentistry in Greenwich — check-ups, Invisalign, implants and emergency care. We explain fees before treatment starts.",
+  image: stock.patientSmile,
   imageAlt: "Happy patient with a healthy, confident smile",
+  /** Replace with your own clinic reel when ready */
+  video: "/video/hero.mp4",
+  videoPoster: stock.clinic,
 } as const;
 
 export const services = [
   {
-    title: "Cosmetic Procedures",
+    title: "Cosmetic Dentistry",
     description:
-      "Attain a perfect smile with our variety of highly popular cosmetic dental techniques. Revive your skin with the variety of skin treatments on offer.",
+      "Whitening, bonding, veneers and smile makeovers. We'll talk through what would actually suit your teeth.",
     image: images.cosmetic,
     href: "/treatments#cosmetic",
   },
   {
-    title: "Dental Implants in Greenwich",
+    title: "Dental Implants",
     description:
-      "Dental implants restore the natural function of your bite by replacing one or more missing teeth.",
+      "Replace one tooth or several — fixed in place, no slipping dentures. Dr Agarwal handles implant placement and complex cases.",
     image: images.implantClinic,
     href: "/treatments#implants",
   },
   {
     title: "General Dentistry",
     description:
-      "At Greenwich Dental Health, we deliver all aspects of routine dental care for your entire family.",
+      "Check-ups, fillings, children's dentistry and hygiene for the whole family. Same-day emergency slots where we can.",
     image: images.clinic,
     href: "/treatments#general",
   },
   {
     title: "Advanced Dentistry",
     description:
-      "High quality advanced dentistry using the very best in digital technology — to empower your smile.",
+      "Same-day CEREC crowns, root canal treatment, IV sedation and digital planning — when routine care isn't enough.",
     image: images.team,
     href: "/treatments#advanced",
-  },
-] as const;
-
-export const testimonials = [
-  {
-    quote:
-      "Had an emergency which was dealt with brilliantly. Equipment is super new, bedside manner and professionalism is outstanding from all involved. Yes, it's not the cheapest, but it's also not the most expensive around.",
-    author: "James M.",
-    detail: "Greenwich patient",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&q=80",
-  },
-  {
-    quote:
-      "I am always pretty nervous about visiting the dentist — I haven't found one I have particularly liked until now. These guys are phenomenal! They put you at ease, explain everything and answer any questions. Really fantastic.",
-    author: "Sarah T.",
-    detail: "New patient",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&q=80",
-  },
-  {
-    quote:
-      "Clear advice, transparent fees, and a calm modern practice near Cutty Sark. Invisalign treatment has been straightforward from consultation through to my final aligners.",
-    author: "Priya K.",
-    detail: "Invisalign patient",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&q=80",
   },
 ] as const;
 
@@ -154,44 +268,32 @@ export const googleReviewsFallback = {
     {
       author: "Ben L",
       rating: 5,
-      authorPhoto:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&h=96&fit=crop&crop=faces&q=80",
+      authorPhoto: stock.teamMale,
       text: "Friendly, professional staff and nice environment. First dentist I have been to where they take photos of your teeth, display them on a monitor and explain any issues and what needs to be done.",
     },
     {
       author: "Sue W",
       rating: 5,
-      authorPhoto:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=96&h=96&fit=crop&crop=faces&q=80",
+      authorPhoto: stock.reviewFemale,
       text: "I had not been to the dentist for 6+ years because of anxiety. Dr Agarwal and all his staff have been incredibly understanding, kind and supportive. I can smile again without worrying.",
     },
     {
       author: "Margaret H",
       rating: 5,
-      authorPhoto:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=96&h=96&fit=crop&crop=faces&q=80",
+      authorPhoto: stock.patientFemale,
       text: "A real pleasure — not the sort of thing you normally hear about a dentist. Dr Agarwal really cares; his professionalism, care and attention to detail is evident at every stage.",
     },
     {
       author: "Rebecca Corry",
       rating: 5,
-      authorPhoto:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&crop=faces&q=80",
+      authorPhoto: stock.patientSmile,
       text: "Fantastic dental practice! I was able to get a same day emergency appointment after smashing my front teeth and Dr Goyal did an amazing job with my composite fillings.",
     },
     {
       author: "Alfredo S",
       rating: 5,
-      authorPhoto:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&crop=faces&q=80",
+      authorPhoto: stock.reviewMale,
       text: "Came here for Invisalign treatment and it's going wonderfully! Plenty of information, modern equipment and very friendly staff.",
-    },
-    {
-      author: "James M",
-      rating: 5,
-      authorPhoto:
-        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=96&h=96&fit=crop&crop=faces&q=80",
-      text: "Brilliant practice near Cutty Sark — easy to book, on-time appointments, and honest advice about what I actually needed versus optional extras.",
     },
   ],
 } as const;
@@ -211,7 +313,7 @@ export const teamMembers = [
       "DipImpDent (RCSEng)",
     ],
     specialties: ["Dental implants", "IV sedation", "Complex restorative dentistry"],
-    bio: "Dr Abhishek Agarwal is a highly experienced dentist with advanced training in implant dentistry, sedation, and complex restorative care. He leads the clinical team with a patient-first approach.",
+    bio: "Clinical Director. Implants, IV sedation and complex restorative work — the cases other practices refer on.",
     image: images.team,
   },
   {
@@ -220,8 +322,8 @@ export const teamMembers = [
     gdc: "246298",
     qualifications: ["BDS", "LDS RCS (Eng)", "MJDF RCS (Eng)", "Dip Endodontics (UCLAN)"],
     specialties: ["Root canal treatment", "Minimally invasive cosmetic dentistry", "Endodontics"],
-    bio: "Dr Goyal qualified with distinction and brings expertise in endodontics and minimally invasive cosmetic dentistry, helping patients achieve healthy, beautiful smiles.",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&fit=crop&q=80",
+    bio: "Qualified with distinction. Endodontics and minimally invasive cosmetic work — root canals and front-tooth repairs are her speciality.",
+    image: stock.teamFemale,
   },
   {
     name: "Dr Michael Chen",
@@ -229,8 +331,8 @@ export const teamMembers = [
     gdc: "281104",
     qualifications: ["BDS (Hons)", "MFDS RCPS (Glasg)"],
     specialties: ["General dentistry", "Cosmetic dentistry", "Nervous patients & families"],
-    bio: "Dr Chen focuses on general and cosmetic dentistry, with a gentle approach especially valued by nervous patients and families.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&fit=crop&q=80",
+    bio: "General and cosmetic dentistry. Known for a calm chairside manner — popular with nervous patients and families.",
+    image: stock.reviewMale,
   },
   {
     name: "Emma Richards",
@@ -247,8 +349,8 @@ export const teamMembers = [
       "Implant treatment journeys",
       "Fees & scheduling",
     ],
-    bio: "Emma guides patients through treatment options, fees and appointment scheduling — your main point of contact from first enquiry to completion.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&fit=crop&q=80",
+    bio: "Your point of contact from first call to final appointment — treatment plans, Invisalign journeys and fee breakdowns.",
+    image: stock.patientSmile,
   },
   {
     name: "Sarah Mitchell",
@@ -265,8 +367,8 @@ export const teamMembers = [
       "Gum health",
       "Preventive care",
     ],
-    bio: "Sarah provides preventive care, hygiene appointments and gum health support to keep smiles healthy between dental visits.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&fit=crop&q=80",
+    bio: "Hygiene and gum care — scale and polish, air polish, and periodontal treatment between dental visits.",
+    image: stock.portraitWoman,
   },
   {
     name: "James Coleman",
@@ -282,8 +384,8 @@ export const teamMembers = [
       "Reception & enquiries",
       "Insurance & billing support",
     ],
-    bio: "James ensures the practice runs smoothly day to day and is often the friendly voice you'll speak with on the phone.",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&fit=crop&q=80",
+    bio: "Runs day-to-day operations — often the first voice on the phone. Handles billing, insurance queries and scheduling.",
+    image: stock.teamMale2,
   },
 ] as const;
 
@@ -300,16 +402,70 @@ export const invisalignPromo = {
 
 export const trustItems = [
   "Invisalign Elite Provider",
-  "Digital technology & modern equipment",
-  "Family-friendly, stress-free care",
-  "Near Cutty Sark, Greenwich",
+  "Digital x-rays and 3D scanning",
+  "IV sedation for nervous patients",
+  "Five minutes from Cutty Sark DLR",
+] as const;
+
+export const pageHeroImages = {
+  about: {
+    src: images.hero,
+    alt: "Greenwich Dental Health private dental clinic",
+  },
+  treatments: {
+    src: images.cosmetic,
+    alt: "Cosmetic and general dental treatments",
+  },
+  fees: {
+    src: images.clinic,
+    alt: "Modern dental practice interior",
+  },
+  team: {
+    src: images.team,
+    alt: "Greenwich Dental Health clinical team",
+  },
+  contact: {
+    src: images.clinic,
+    alt: "Reception at Greenwich Dental Health",
+  },
+  emergency: {
+    src: images.clinic,
+    alt: "Emergency dental care at our Greenwich practice",
+  },
+  nervous: {
+    src: images.smile,
+    alt: "Gentle dentistry for nervous patients",
+  },
+  refer: {
+    src: images.team,
+    alt: "Refer a patient to our Greenwich practice",
+  },
+} as const;
+
+export const dentalInsurers = [
+  "Bupa",
+  "AXA",
+  "Unum",
+  "Denplan",
+  "Vitality",
+  "Simplyhealth",
+  "Overseas insurers",
 ] as const;
 
 export const feeIntro = {
-  headline:
-    "At Greenwich Dental Health, our goal is to provide outstanding dental care at accessible prices.",
-  insurance:
-    "We accept all major dental insurance providers such as Bupa, AXA, Unum, Denplan, Vitality and Simplyhealth, along with overseas insurers. After each treatment, we provide a fully itemised invoice to make claiming easy and hassle-free.",
+  feesTitle: "What does treatment cost?",
+  feesLead:
+    "Pick a category below. Prices are indicative — your dentist confirms the final quote at your consultation.",
+  insuranceTitle: "Dental insurance accepted",
+  insuranceLead:
+    "We accept Bupa, AXA, Denplan, Vitality, Simplyhealth and overseas insurers. Itemised invoices provided after every visit.",
+  insuranceDetail:
+    "After every appointment we provide a fully itemised invoice — clear codes, dates and fees — so your claim is straightforward for you or your employer.",
+  ctaTitle: "Questions about our fees?",
+  ctaLead:
+    "Call or email — we're happy to walk through treatment options, insurance or what to expect before you book.",
+  ctaContactLabel: "Contact us",
+  ctaBookLabel: "Book free consultation",
 } as const;
 
 export type FeeItem = { service: string; price: string; note?: string };
@@ -442,7 +598,7 @@ export const treatments = [
     id: "cosmetic",
     title: "Cosmetic Dentistry",
     description:
-      "Transform your smile with teeth whitening, porcelain veneers, composite bonding, and smile makeovers. Our cosmetic treatments are tailored to help you achieve natural, beautiful results.",
+      "Whitening, veneers, composite bonding and smile makeovers. We plan around your teeth and budget, not a one-size package.",
     items: [
       "Teeth Whitening (Zoom, Enlighten, home kits)",
       "Porcelain Veneers & Crowns",
@@ -456,7 +612,7 @@ export const treatments = [
     id: "implants",
     title: "Dental Implants",
     description:
-      "Replace missing teeth with durable, natural-looking dental implants. From single tooth replacement to full-arch solutions, we restore function and confidence to your smile.",
+      "Single-tooth replacements through to full-arch solutions. Titanium posts fixed in the jaw — function and appearance restored.",
     items: [
       "Single tooth implants",
       "Implant-retained dentures",
@@ -470,7 +626,7 @@ export const treatments = [
     id: "general",
     title: "General Dentistry",
     description:
-      "Comprehensive routine care for the whole family — examinations, fillings, extractions, and preventive treatments in a welcoming, stress-free environment.",
+      "Examinations, fillings, extractions and preventive care for adults and children. Emergency appointments available.",
     items: [
       "Routine check-ups & examinations",
       "Fillings & restorations",
@@ -484,7 +640,7 @@ export const treatments = [
     id: "invisalign",
     title: "Invisalign™ Clear Aligners",
     description:
-      "Straighten your teeth discreetly with Invisalign clear aligners. Free consultations for adults and teenagers, with digital planning and expert supervision throughout your journey.",
+      "Clear aligners for adults and teenagers. Free initial consultation, digital scan, and treatment supervised by our Invisalign Elite team.",
     items: [
       "Free Invisalign consultation",
       "Mild, moderate & complex cases",
@@ -498,7 +654,7 @@ export const treatments = [
     id: "advanced",
     title: "Advanced Dentistry",
     description:
-      "Cutting-edge treatments using digital technology — Invisalign clear aligners, CEREC same-day crowns, root canal therapy, and IV sedation for nervous patients.",
+      "CEREC same-day crowns, root canal therapy, IV sedation and fixed braces — backed by digital scanning and 3D planning.",
     items: [
       "Invisalign clear aligners",
       "CEREC same-day crowns",
@@ -512,7 +668,7 @@ export const treatments = [
     id: "hygiene",
     title: "Hygiene & Gum Care",
     description:
-      "Professional hygiene appointments and specialist periodontal treatment to keep your gums healthy and your smile sparkling.",
+      "Scale and polish, air polish for staining, and gum disease treatment. Hygiene appointments with our therapist or a dentist.",
     items: [
       "Scale & polish",
       "Air polish for stubborn stains",
@@ -568,22 +724,22 @@ export const beforeAfterImages = [
 export const resultsCases = [
   {
     treatment: "Teeth Whitening",
-    description: "Professional chairside and home whitening for a brighter, natural-looking smile.",
+    description: "Chairside Zoom and take-home kits — typically one to two shades lighter in a single visit.",
     image: images.whitening,
   },
   {
     treatment: "Invisalign®",
-    description: "Discreet alignment — straighter teeth without traditional fixed braces.",
+    description: "Clear aligners for mild to complex crowding. Treatment times vary — most cases run 6–18 months.",
     image: images.smile,
   },
   {
     treatment: "Cosmetic Bonding & Veneers",
-    description: "Refined shape, shade and symmetry for the front teeth.",
+    description: "Shape, shade and symmetry corrected on front teeth — bonding from £245 per tooth, veneers from £895.",
     image: images.cosmetic,
   },
   {
     treatment: "Dental Implants",
-    description: "Restored function and appearance for missing teeth.",
+    description: "Single implants from £2,850 including the crown. Before and after photos available at consultation.",
     image: images.implants,
   },
 ] as const;
@@ -591,26 +747,26 @@ export const resultsCases = [
 export const aboutContent = {
   headline: "Your Private Dentist in Greenwich, London",
   paragraphs: [
-    "Welcome to Greenwich Dental Health. We are an award-winning private dental practice located in Greenwich near the Cutty Sark. Committed to achieving healthy and beautiful smiles for all, we offer exceptional dental care at affordable prices within a clean, stress-free and family-friendly environment.",
-    "Our practice combines the latest digital dental technology with a warm, personal approach. Whether you need a routine check-up, emergency care, Invisalign, dental implants, or a complete smile makeover, our experienced team is here to help.",
-    "We believe in transparency — clear communication, upfront pricing, and treatment plans tailored to your needs. Your comfort and confidence are at the heart of everything we do.",
+    "We're a private dental practice at New Capital Quay in Greenwich — about five minutes' walk from Cutty Sark DLR. The practice won Private Dentistry Practice of the Year in 2024 and holds Invisalign Elite Provider status.",
+    "Dr Abhishek Agarwal and Dr Disha Goyal lead the clinical team. Between them they cover implants, sedation, endodontics, cosmetic work and general dentistry. We use digital x-rays, intraoral cameras and 3D scanning — you'll see your own teeth on screen before any treatment is discussed.",
+    "Fees are listed on our website and confirmed in writing at your consultation. We accept Bupa, AXA, Denplan and most major insurers, and provide itemised invoices for claims.",
   ],
   values: [
     {
-      title: "Exceptional care",
-      description: "Advanced training and modern equipment for the highest standard of dentistry.",
+      title: "Clinical standards",
+      description: "Award-winning team with advanced training in implants, sedation and digital dentistry.",
     },
     {
-      title: "Accessible pricing",
-      description: "Outstanding care at transparent, competitive fees with insurance accepted.",
+      title: "Upfront pricing",
+      description: "Full fee guide online. Written estimates before treatment — no surprises at checkout.",
     },
     {
-      title: "Family friendly",
-      description: "A welcoming environment for patients of all ages, including nervous patients.",
+      title: "Nervous patients welcome",
+      description: "IV sedation for adults, laughing gas for children aged 5–14. Appointments at your pace.",
     },
     {
-      title: "Local & trusted",
-      description: "Proudly serving Greenwich and South East London from New Capital Quay.",
+      title: "Greenwich riverside",
+      description: "14-16 Victoria Parade, New Capital Quay — parking nearby, easy from Greenwich and Canary Wharf.",
     },
   ],
 } as const;

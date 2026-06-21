@@ -1,12 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import { BeforeAfterGallery } from "@/components/BeforeAfterGallery";
 import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
-import { TeamCarousel } from "@/components/TeamCarousel";
 import { HeroCarousel } from "@/components/HeroCarousel";
+import { ServiceCard } from "@/components/ServiceCard";
 import { SpeakToUsBanner } from "@/components/SpeakToUsBanner";
+import { TeamCarousel } from "@/components/TeamCarousel";
 import { TrustStrip } from "@/components/TrustStrip";
-import { images, invisalignPromo, services, site } from "@/lib/content";
+import { invisalignPromo, services, site } from "@/lib/content";
 
 export default function HomePage() {
   return (
@@ -14,43 +14,26 @@ export default function HomePage() {
       <HeroCarousel />
       <TrustStrip />
 
-      <section className="section-muted mesh-bg mesh-bg--muted px-5 py-16 lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="section-eyebrow">What we offer</p>
-              <h2 className="heading-lg mt-2 text-foreground">Comprehensive dental care</h2>
-              <p className="section-lead mt-3 max-w-xl">
-                From check-ups to smile makeovers — clear advice, transparent fees, and treatment that fits your life.
-              </p>
-            </div>
-            <Link href="/treatments" className="btn-outline shrink-0">
+      <section className="section-muted page-section border-t border-border">
+        <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-[minmax(0,15rem)_1fr] lg:gap-14 xl:grid-cols-[minmax(0,17rem)_1fr] xl:gap-16">
+          <div className="sticky-below-header">
+            <h2 className="heading-lg text-foreground">Treatments</h2>
+            <p className="type-body-sm mt-3 text-muted">
+              From routine check-ups to implants and Invisalign. Full fee guide on each treatment page.
+            </p>
+            <Link href="/treatments" className="btn-outline mt-6 inline-flex">
               View all treatments
             </Link>
           </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:mt-0">
             {services.map((service) => (
-              <article key={service.title} className="card-friendly group overflow-hidden">
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                    sizes="50vw"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="heading-md text-foreground">{service.title}</h3>
-                  <p className="type-body-sm mt-2 text-muted">{service.description}</p>
-                  <Link
-                    href={service.href}
-                    className="type-link mt-4 inline-flex items-center gap-1 text-brand-dark hover:text-brand-lime"
-                  >
-                    Find out more <span aria-hidden>→</span>
-                  </Link>
-                </div>
-              </article>
+              <ServiceCard
+                key={service.title}
+                title={service.title}
+                description={service.description}
+                image={service.image}
+                href={service.href}
+              />
             ))}
           </div>
         </div>
@@ -58,11 +41,10 @@ export default function HomePage() {
 
       <BeforeAfterGallery />
 
-      <section className="section-dark px-5 py-14 lg:px-8">
+      <section className="section-dark page-section page-section--compact border-t border-white/10">
         <div className="mx-auto max-w-7xl lg:flex lg:items-center lg:justify-between lg:gap-10">
           <div>
-            <p className="section-eyebrow">Limited time</p>
-            <h2 className="heading-lg mt-2 text-white">{invisalignPromo.title}</h2>
+            <h2 className="heading-lg text-white">{invisalignPromo.title}</h2>
             <p className="type-body-sm mt-2 font-medium text-brand-lime">{invisalignPromo.date}</p>
             <ul className="mt-4 flex flex-wrap gap-2">
               {invisalignPromo.offers.map((offer) => (
@@ -79,7 +61,7 @@ export default function HomePage() {
             href={site.bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-dark mt-6 shrink-0 lg:mt-0"
+            className="btn-primary mt-6 shrink-0 lg:mt-0"
           >
             Reserve your place
           </a>
@@ -88,19 +70,23 @@ export default function HomePage() {
 
       <GoogleReviewsSection />
 
-      <section className="section-muted mesh-bg mesh-bg--muted px-5 py-16 lg:px-8 lg:py-20">
+      <section className="section-light page-section border-t border-border">
         <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-6 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="section-eyebrow">Our dentists</p>
-              <h2 className="heading-lg mt-2 text-foreground">Meet the team</h2>
-              <p className="section-lead mt-2">Experienced clinicians who explain your options clearly.</p>
+              <h2 className="heading-lg text-foreground">The team</h2>
+              <p className="type-body-sm mt-2 max-w-lg text-muted">
+                Six clinicians and coordinators — ask for someone by name when you book, or we&apos;ll match you to
+                the right dentist.
+              </p>
             </div>
-            <Link href="/team" className="type-link text-brand-lime hover:underline">
+            <Link href="/team" className="type-link shrink-0 text-brand-lime hover:underline">
               Full profiles →
             </Link>
           </div>
-          <TeamCarousel />
+          <div className="mt-8">
+            <TeamCarousel />
+          </div>
         </div>
       </section>
 

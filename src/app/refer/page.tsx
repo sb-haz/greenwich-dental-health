@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { PageHero } from "@/components/PageHero";
 import { SpeakToUsBanner } from "@/components/SpeakToUsBanner";
-import { site } from "@/lib/content";
+import { pageHeroImages, site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Refer a Patient",
@@ -15,8 +15,10 @@ export default function ReferPage() {
       <PageHero
         title="Refer a Patient"
         subtitle="We welcome referrals from dental and medical colleagues. Contact our team with patient details and we will arrange an appointment promptly."
+        image={pageHeroImages.refer.src}
+        imageAlt={pageHeroImages.refer.alt}
       />
-      <section className="px-5 py-16 lg:px-8 lg:py-24">
+      <section className="page-section page-section--loose">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
           <div>
             <h2 className="heading-sm text-foreground">How to refer</h2>

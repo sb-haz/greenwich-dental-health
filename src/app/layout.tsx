@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description:
-    "Award-winning private dentistry near Cutty Sark. Invisalign, implants, whitening, and family dentistry at accessible prices.",
+    "Award-winning private dentistry near Cutty Sark. Invisalign, implants, whitening, and family dentistry.",
   metadataBase: new URL("https://www.greenwichdentalhealth.co.uk"),
 };
 
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${josefinSans.variable} h-full antialiased`}
+      className={`${josefinSans.variable} h-full bg-brand-dark antialiased`}
       style={{ colorScheme: "light" }}
     >
       <body className="min-h-full flex flex-col bg-background font-sans text-foreground">

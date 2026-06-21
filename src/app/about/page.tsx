@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AwardBadges } from "@/components/AwardBadges";
 import { PageHero } from "@/components/PageHero";
+import { pageHeroImages } from "@/lib/content";
 import { SpeakToUsBanner } from "@/components/SpeakToUsBanner";
 import { aboutContent, images, site } from "@/lib/content";
 
@@ -15,9 +16,14 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageHero title="About Greenwich Dental Health" subtitle={aboutContent.headline} />
+      <PageHero
+        title="About Greenwich Dental Health"
+        subtitle={aboutContent.headline}
+        image={pageHeroImages.about.src}
+        imageAlt={pageHeroImages.about.alt}
+      />
 
-      <section className="px-5 py-16 lg:px-8 lg:py-24">
+      <section className="page-section page-section--loose">
         <div className="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-2">
           <div className="space-y-5">
             {aboutContent.paragraphs.map((p) => (
@@ -40,11 +46,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-surface-alt px-5 py-16 lg:px-8 lg:py-24">
+      <section className="bg-surface-alt page-section page-section--loose">
         <div className="mx-auto max-w-6xl">
-          <h2 className="heading-lg text-foreground">Award-winning care</h2>
-          <p className="section-lead mt-3 max-w-xl">
-            Recognised nationally for clinical excellence, digital dentistry and leading Invisalign providers.
+          <h2 className="heading-lg text-foreground">Awards</h2>
+          <p className="type-body-sm mt-3 max-w-xl text-muted">
+            Practice of the Year 2024. Highly commended for digital dentistry. Invisalign Elite Provider.
           </p>
           <div className="mt-10">
             <AwardBadges variant="grid" />
@@ -52,7 +58,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-surface-alt px-5 py-16 lg:px-8 lg:py-24">
+      <section className="bg-surface-alt page-section page-section--loose">
         <div className="mx-auto max-w-6xl">
           <h2 className="heading-lg text-foreground">What we stand for</h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
@@ -66,7 +72,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 py-16 lg:px-8 lg:py-24">
+      <section className="page-section page-section--loose">
         <div className="mx-auto max-w-6xl text-center">
           <h2 className="heading-lg text-foreground">Visit us in Greenwich</h2>
           <p className="type-body-sm mt-4 text-muted">{site.address}</p>

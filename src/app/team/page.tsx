@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { SpeakToUsBanner } from "@/components/SpeakToUsBanner";
-import { teamMembers } from "@/lib/content";
+import { pageHeroImages, teamMembers } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Our Team",
@@ -15,9 +15,11 @@ export default function TeamPage() {
       <PageHero
         title="Meet Our Team"
         subtitle="Experienced clinicians dedicated to exceptional, patient-centred care in Greenwich."
+        image={pageHeroImages.team.src}
+        imageAlt={pageHeroImages.team.alt}
       />
 
-      <section className="px-5 py-16 lg:px-8 lg:py-24">
+      <section className="page-section page-section--loose">
         <div className="mx-auto max-w-6xl space-y-16">
           {teamMembers.map((member) => (
             <article

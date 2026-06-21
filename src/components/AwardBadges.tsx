@@ -40,16 +40,16 @@ export function AwardBadges({
   }
 
   return (
-    <ul className="grid gap-4 sm:grid-cols-3">
+    <ul className="award-badges grid gap-4 sm:grid-cols-3">
       {items.map((award) => (
-        <li
-          key={award.title}
-          className={`flex items-center gap-3 rounded-lg border p-3 ${
-            onDark
-              ? "border-white/10 bg-brand-dark-elevated"
-              : "border-border bg-surface shadow-sm"
-          }`}
-        >
+        <li key={award.title} className="list-none">
+          <div
+            className={`flex w-full items-center gap-3 rounded-lg border p-3 ${
+              onDark
+                ? "border-white/10 bg-brand-dark-elevated"
+                : "border-border bg-surface shadow-sm"
+            }`}
+          >
           <div
             className={`relative h-14 w-14 shrink-0 overflow-hidden rounded-md ${
               onDark ? "bg-brand-dark" : "bg-surface-alt"
@@ -69,6 +69,7 @@ export function AwardBadges({
               {award.title}
             </p>
             <p className={`type-caption truncate ${onDark ? "text-white/55" : "text-muted"}`}>{award.result}</p>
+          </div>
           </div>
         </li>
       ))}

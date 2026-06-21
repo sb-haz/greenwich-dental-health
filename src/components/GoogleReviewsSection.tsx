@@ -81,23 +81,22 @@ export async function GoogleReviewsSection() {
     })),
   };
 
-  const displayReviews = data.reviews.slice(0, 6);
+  const displayReviews = data.reviews.slice(0, 5);
 
   return (
-    <section className="section-light mesh-bg mesh-bg--light px-5 py-16 lg:px-8 lg:py-20">
+    <section className="section-muted page-section border-t border-border">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <p className="section-eyebrow">Google reviews</p>
-            <h2 className="heading-lg mt-2 text-foreground">What patients say</h2>
+            <h2 className="heading-lg text-foreground">Patient reviews</h2>
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <Stars rating={data.rating} />
               <span className="type-body-sm font-semibold text-foreground">
-                {data.rating.toFixed(1)} · {data.totalReviews}+ reviews on Google
+                {data.rating.toFixed(1)} · {data.totalReviews}+ on Google
               </span>
             </div>
-            <p className="section-lead mt-3">
-              Real feedback from our patients — with more photos and videos on our Google listing.
+            <p className="type-body-sm mt-3 text-muted">
+              Unedited reviews from our Google listing — more photos and videos there too.
             </p>
           </div>
           <a
@@ -106,7 +105,7 @@ export async function GoogleReviewsSection() {
             rel="noopener noreferrer"
             className="btn-outline shrink-0 text-center"
           >
-            Photos &amp; videos on Google →
+            View on Google →
           </a>
         </div>
 
@@ -132,7 +131,7 @@ export async function GoogleReviewsSection() {
         </div>
 
         <p className="type-body-sm mt-8 text-center text-muted">
-          See more patient stories, photos and videos on our{" "}
+          Read all reviews on our{" "}
           <a href={data.mapsUrl} target="_blank" rel="noopener noreferrer" className="type-link text-brand-lime">
             Google listing
           </a>

@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { navLinks, secondaryNavLinks, site } from "@/lib/content";
+import { navLinks, site } from "@/lib/content";
+import { MobileNavDrawer } from "./MobileNavDrawer";
 import { SecondaryNav } from "./SecondaryNav";
 import { TopBar } from "./TopBar";
 
@@ -15,32 +16,9 @@ const primaryNav = navLinks.filter((l) => !("external" in l && l.external));
 
 export function Header() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
   const [condensed, setCondensed] = useState(false);
-  const [showNavLogo, setShowNavLogo] = useState(!isHome);
   const condensedRef = useRef(false);
-
-  useEffect(() => {
-    if (!isHome) {
-      setShowNavLogo(true);
-      return;
-    }
-
-    setShowNavLogo(false);
-    const trigger = document.getElementById("hero-logo-trigger");
-    if (!trigger) {
-      setShowNavLogo(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setShowNavLogo(!entry.isIntersecting),
-      { threshold: 0, rootMargin: `-${CONDENSE_AT}px 0px 0px 0px` },
-    );
-    observer.observe(trigger);
-    return () => observer.disconnect();
-  }, [isHome, pathname]);
 
   useEffect(() => {
     const update = () => {
@@ -72,6 +50,23 @@ export function Header() {
     setOpen(false);
   }, [pathname]);
 
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const syncHeaderHeight = () => {
+      document.documentElement.style.setProperty("--site-header-height", `${header.offsetHeight}px`);
+    };
+
+    syncHeaderHeight();
+    const observer = new ResizeObserver(syncHeaderHeight);
+    observer.observe(header);
+
+    return () => observer.disconnect();
+  }, [condensed]);
+
   const navLinkClass = (isActive: boolean) =>
     `type-nav rounded-lg px-3 py-2 transition-colors duration-200 ${
       isActive
@@ -82,7 +77,7 @@ export function Header() {
   const reviewsLink = navLinks.find((l) => "external" in l && l.external);
 
   return (
-    <header className="sticky top-0 z-50 bg-surface">
+    <header ref={headerRef} className="sticky top-0 z-50 bg-surface">
       <div
         className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
         style={{ gridTemplateRows: condensed ? "0fr" : "1fr" }}
@@ -97,29 +92,19 @@ export function Header() {
           condensed ? "shadow-md shadow-black/5" : ""
         }`}
       >
-        <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between gap-4 px-5 lg:px-8">
-          <div
-            className={`flex shrink-0 items-center overflow-hidden transition-all duration-300 ease-out ${
-              showNavLogo ? "max-w-[17rem] opacity-100" : "pointer-events-none max-w-0 opacity-0"
-            }`}
-            aria-hidden={!showNavLogo}
-          >
-            <Link href="/" className="flex items-center" tabIndex={showNavLogo ? 0 : -1}>
-              <Image
-                src={site.logo}
-                alt="Greenwich Dental Health"
-                width={280}
-                height={72}
-                className="h-14 w-auto max-w-[17rem] object-contain object-left"
-                priority={!isHome}
-              />
-            </Link>
-          </div>
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:h-[4.25rem] sm:gap-4 sm:px-5 lg:px-8">
+          <Link href="/" className="flex shrink-0 items-center">
+            <Image
+              src={site.logo}
+              alt="Greenwich Dental Health"
+              width={site.logoWidth}
+              height={site.logoHeight}
+              className="h-11 w-auto max-w-[12rem] object-contain object-left sm:h-14 sm:max-w-[17rem]"
+              priority
+            />
+          </Link>
 
-          <nav
-            className={`hidden items-center gap-0.5 lg:flex ${!showNavLogo && isHome ? "ml-auto" : ""}`}
-            aria-label="Main"
-          >
+          <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main">
             {primaryNav.map((link) => {
               const isActive =
                 link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
@@ -149,7 +134,7 @@ export function Header() {
             </a>
           </nav>
 
-          <div className={`flex items-center gap-2 lg:hidden ${!showNavLogo && isHome ? "ml-auto" : ""}`}>
+          <div className="flex items-center gap-2 lg:hidden">
             <a
               href={site.phoneHref}
               className="type-link rounded-lg border border-border bg-surface-alt px-3 py-2 text-foreground"
@@ -158,58 +143,21 @@ export function Header() {
             </a>
             <button
               type="button"
-              className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-foreground"
+              className={`mobile-menu-trigger ${open ? "mobile-menu-trigger--open" : ""}`}
               aria-expanded={open}
-              aria-label="Open menu"
+              aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((v) => !v)}
             >
-              {open ? "✕" : "☰"}
+              <span aria-hidden />
+              <span aria-hidden />
+              <span aria-hidden />
             </button>
           </div>
         </div>
       </div>
       <SecondaryNav />
 
-      {open && (
-        <nav className="border-b border-border bg-surface px-5 py-5 shadow-lg lg:hidden">
-          <div className="flex flex-col gap-1">
-            {primaryNav.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="type-nav rounded-lg px-4 py-3 text-foreground hover:bg-surface-alt"
-              >
-                {link.label}
-              </Link>
-            ))}
-            {reviewsLink && (
-              <a
-                href={reviewsLink.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="type-nav rounded-lg px-4 py-3 text-foreground"
-              >
-                {reviewsLink.label}
-              </a>
-            )}
-          </div>
-          <div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4">
-            {secondaryNavLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={`type-caption rounded-full px-3 py-1.5 font-medium ${
-                  "highlight" in link && link.highlight
-                    ? "bg-red-50 font-semibold text-red-600"
-                    : "bg-surface-alt text-muted"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </nav>
-      )}
+      <MobileNavDrawer open={open} onClose={() => setOpen(false)} />
     </header>
   );
 }

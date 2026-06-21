@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FAQAccordion } from "@/components/FAQAccordion";
+import { DentalInsuranceSection } from "@/components/DentalInsuranceBlock";
 import { FeeTabs } from "@/components/FeeTabs";
 import { PageHero } from "@/components/PageHero";
 import { SpeakToUsBanner } from "@/components/SpeakToUsBanner";
-import { feeIntro, feePolicies, site } from "@/lib/content";
+import { feeIntro, feePolicies, pageHeroImages, site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Fees & Pricing",
   description:
-    "Transparent private dental fees at Greenwich Dental Health — examinations, Invisalign, implants, cosmetic dentistry, and more.",
+    "Private dental fees at Greenwich Dental Health — examinations, Invisalign, implants, cosmetic dentistry, and more.",
 };
 
 export default function FeesPage() {
@@ -18,29 +19,23 @@ export default function FeesPage() {
       <PageHero
         title="Fees & Pricing"
         subtitle="Outstanding dental care at accessible prices. All fees are indicative — your dentist will provide a personalised estimate at your consultation."
+        image={pageHeroImages.fees.src}
+        imageAlt={pageHeroImages.fees.alt}
       />
 
-      <section className="px-5 py-16 lg:px-8 lg:py-24">
+      <section className="section-muted page-section page-section--loose">
         <div className="mx-auto max-w-6xl">
-          <p className="type-lead max-w-3xl">{feeIntro.headline}</p>
-          <div className="mt-10 rounded-2xl border border-primary/20 bg-soft-green p-8">
-            <h2 className="heading-sm text-foreground">Dental insurance</h2>
-            <p className="type-body-sm mt-3 text-muted">{feeIntro.insurance}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-surface-alt px-5 py-16 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="heading-lg text-foreground">Treatment fees</h2>
-          <p className="type-body-sm mt-3 text-muted">Select a category to view prices.</p>
+          <h2 className="heading-lg text-foreground">{feeIntro.feesTitle}</h2>
+          <p className="section-lead mt-3 max-w-2xl">{feeIntro.feesLead}</p>
           <div className="mt-10">
             <FeeTabs />
           </div>
         </div>
       </section>
 
-      <section className="px-5 py-16 lg:px-8 lg:py-24">
+      <DentalInsuranceSection />
+
+      <section className="page-section page-section--loose">
         <div className="mx-auto max-w-6xl">
           <h2 className="heading-lg text-foreground">Practice policies</h2>
           <ul className="mt-8 space-y-4">
@@ -65,7 +60,7 @@ export default function FeesPage() {
         </div>
       </section>
 
-      <section className="bg-surface-alt px-5 py-16 lg:px-8 lg:py-24">
+      <section className="bg-surface-alt page-section page-section--loose">
         <div className="mx-auto max-w-3xl">
           <h2 className="heading-lg text-foreground">Frequently asked questions</h2>
           <div className="mt-10">
@@ -79,7 +74,7 @@ export default function FeesPage() {
           </p>
         </div>
       </section>
-      <SpeakToUsBanner />
+      <SpeakToUsBanner variant="fees" />
     </>
   );
 }
